@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div id="timer">
+        <h2 id="title">Meu timer</h2>
+        <div id="time">
+            <span id="timer"></span>
+        </div>
+        <div id="options">
+            <button onclick={startTimer()}>Iniciar</button>
+            <button onclick={stopTimer()}>Pausar</button>
+            <button onclick={restartTimer()}>Zerar</button>
+        </div>
+    </div>
+    <script src="./assets/timer.js"></script>
+</body>
+</html>
