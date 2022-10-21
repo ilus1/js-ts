@@ -5,19 +5,10 @@ const newTask = document.querySelector('#newTaskButton');
 newTask.addEventListener('click', () => addTask(taskNameInput.value));
 taskNameInput.addEventListener('keypress', (event) => event.keyCode == 13 && addTask(taskNameInput.value));
 
-let taskId = 0;
-
-function createTaskItem(componentId) {
-    const taskItem = document.createElement('li');
-    taskItem.setAttribute('id', componentId);
-
-    return taskItem;
-}
-
-function createTaskRemoveButton(componentId) {
+function createTaskRemoveButton() {
     const removeTaskButton = document.createElement('button');
 
-    removeTaskButton.addEventListener('click', () => removeTask(componentId));
+    removeTaskButton.addEventListener('click', () => removeTaskButton.parentElement.remove());
     removeTaskButton.innerHTML = 'Remove';
     removeTaskButton.setAttribute('class', 'removeTaskButton');
 
@@ -29,28 +20,20 @@ function clearInput() {
     taskNameInput.focus();
 }
 
-function removeTask(componentId) {
-    const taskItem = document.querySelector(`#${componentId}`);
-    console.log(taskItem);
-    taskList.removeChild(taskItem);
+function isValidInput(taskName) {
+    return taskName && taskName.trim() !== '';
 }
 
-function isValidInput(task) {
-    return task && task.trim() !== '';
-}
+function addTask(taskName) {
+    if(isValidInput(taskName)) {
+        const taskItem = document.createElement('li');
+        const removeTaskButton = createTaskRemoveButton();
 
-function addTask(task) {
-    if(isValidInput(task)) {
-        const componentId = `task-${taskId}`;
-        const taskItem = createTaskItem(componentId);
-        const removeTaskButton = createTaskRemoveButton(componentId);
-
-        taskItem.innerHTML = task + ' ';
+        taskItem.innerHTML = taskName + ' ';
 
         taskList.appendChild(taskItem);
         taskItem.appendChild(removeTaskButton);
 
-        taskId++;
     }
     clearInput();
 }
